@@ -9,12 +9,12 @@ import MobileMenu from "./mobile-menu/MobileMenu";
 
 
 export default function Navbar() {
-  
+
   const { mode, togglemode } = useContext(myContext);
 
   return (
     <div className="sticky top-0 z-50 bg-white ">
-<MobileMenu/>
+      <MobileMenu />
 
 
       <header className="relative bg-white">
@@ -37,10 +37,10 @@ export default function Navbar() {
         >
           <div className="">
             <div className="flex items-center h-16">
-              <MobileBar/>
+              <MobileBar />
 
               {/* Logo */}
-              <Logo/>
+              <Logo />
               <Menu />
               <Mode />
               <Cart />
