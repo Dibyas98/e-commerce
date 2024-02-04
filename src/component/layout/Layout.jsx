@@ -1,15 +1,16 @@
 import React from 'react'
 import Navbar from '../navbar/Navbar'
 import Footer from '../footer/Footer'
-import HeroSection from '../hero-section/HeroSection'
-import Filter from '../filter/Filter'
+import Cart from '../../pages/cart/Cart'
+import ProductPage from '../../pages/product-page/ProductPage'
+
+
 
 export default function Layout() {
   return (
     <>
       <Navbar></Navbar>
-      <HeroSection></HeroSection>
-      <Filter></Filter>
+      <ProductPage></ProductPage>
       <Footer></Footer>
     </>
   )
