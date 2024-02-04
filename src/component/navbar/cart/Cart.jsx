@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 import { myContext } from '../../../context/Data'
+import { Link } from 'react-router-dom'
 
 export default function Cart() {
   const {mode}= useContext(myContext)
   return (
     <div className="flow-root ml-4 lg:ml-6">
-    <a
+    <Link
       to={"/cart"}
       className="flex items-center p-2 -m-2 group"
       style={{ color: mode === "dark" ? "white" : "" }}
@@ -32,7 +33,7 @@ export default function Cart() {
         0
       </span>
       <span className="sr-only">items in cart, view bag</span>
-    </a>
+    </Link>
   </div>
   )
 }

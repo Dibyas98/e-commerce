@@ -1,6 +1,7 @@
 import React,{useContext} from 'react'
 import { RiUser3Fill } from "react-icons/ri";
 import { myContext } from '../../../context/Data';
+import { Link } from 'react-router-dom';
 
 
 export default function Menu() {
@@ -8,20 +9,20 @@ export default function Menu() {
   return (
     <div className="flex items-center ml-auto">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a
-                    href={"/allproducts"}
+                  <Link
+                    to={"/"}
                     className="text-sm font-medium text-gray-700 "
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
-                    All Products
-                  </a>
-                  <a
+                    Home
+                  </Link>
+                  <Link
                     to={"/order"}
                     className="text-sm font-medium text-gray-700 "
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
                     Order
-                  </a>
+                  </Link>
                   <a
                     to={"/dashboard"}
                     className="text-sm font-medium text-gray-700 "

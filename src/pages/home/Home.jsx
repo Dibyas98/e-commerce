@@ -12,7 +12,6 @@ export default function Home() {
     <Filter></Filter>
     <Track></Track>
     <Testimonial></Testimonial>
-    <Footer></Footer>
     </>
   )
 }

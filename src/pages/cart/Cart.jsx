@@ -3,6 +3,7 @@ import { myContext } from '../../context/Data'
 import CartProduct from './CartProduct'
 import CartTotal from './CartTotal'
 
+
 export default function Cart() {
     const {mode} = useContext(myContext)
   return (
