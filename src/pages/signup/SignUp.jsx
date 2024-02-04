@@ -24,7 +24,7 @@ export default function SignUp() {
         
         try {
           const users = await createUserWithEmailAndPassword(auth,email,password);
-          console.log(users);
+          // console.log(users);
           const user={
             name:name,
             uid:users.user.uid,
@@ -33,6 +33,7 @@ export default function SignUp() {
           }
           
           const userRef = collection(fireDB,'users');
+          // const us = 
           // console.log(userRef);
           await addDoc(userRef,user);
           setloading(false)

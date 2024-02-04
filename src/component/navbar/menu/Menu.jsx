@@ -1,11 +1,12 @@
 import React,{useContext} from 'react'
 import { RiUser3Fill } from "react-icons/ri";
 import { myContext } from '../../../context/Data';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 export default function Menu() {
-    const { mode } = useContext(myContext);
+    const { mode,user,setUser,handelUser} = useContext(myContext);
+    const navigate = useNavigate()
   return (
     <div className="flex items-center ml-auto">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
@@ -23,20 +24,31 @@ export default function Menu() {
                   >
                     Order
                   </Link>
-                  <Link
+                  {Object.keys(user).length === 0?<Link
                     to={"/signup"}
                     className="text-sm font-medium text-gray-700 "
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
                     Signup
-                  </Link>
+                  </Link>:null}
 
-                  <Link to={'/login'}
+                  {Object.keys(user).length===0?<Link to={'/login'}
                     className="text-sm font-medium text-gray-700 cursor-pointer "
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
                     Login
-                  </Link>
+                  </Link>:<button
+                    
+                    className="text-sm font-medium text-gray-700 " onClick={() =>{ 
+                      setUser({})
+                      // console.log(user); // Clears user data
+                      handelUser({});  
+                      return navigate('/login')
+                    }}
+                    style={{ color: mode === "dark" ? "white" : "" }}
+                  >
+                    Logout
+                  </button>}
                 </div>
                 <div className="hidden lg:ml-8 lg:flex">
                   <a href="#" className="flex items-center text-gray-700 ">
@@ -55,7 +67,7 @@ export default function Menu() {
                 </div>
                 <div className="hidden lg:ml-8 lg:flex">
                   <a href="#" className="flex items-center text-gray-700 ">
-                    <RiUser3Fill />
+                    <RiUser3Fill style={{ color: mode === "dark" ? "white" : "" }}/>
                   </a>
                 </div>
 

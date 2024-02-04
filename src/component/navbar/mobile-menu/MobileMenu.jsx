@@ -5,7 +5,7 @@ import { RxCross2 } from 'react-icons/rx'
 import { Link } from "react-router-dom";
 
 export default function MobileMenu() {
-  const {mode,open,setOpen} = useContext(myContext)
+  const {mode,open,setOpen,user,setUser,handelUser} = useContext(myContext)
       //  {/* Mobile menu */}
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -68,14 +68,14 @@ export default function MobileMenu() {
                   </div>
 
                   <div className="flow-root">
-                    <Link
+                    {Object.keys(user).length===0?<Link
                       to={"/signup"}
                       className="block p-2 -m-2 font-medium text-gray-900"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Signup
-                    </Link>
-                  </div>
+                    </Link>:null}
+                  </div>      
 
                   <div className="flow-root">
                     <Link to={('/login')}
