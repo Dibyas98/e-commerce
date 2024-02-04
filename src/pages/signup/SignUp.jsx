@@ -2,19 +2,45 @@ import React,{useState} from "react";
 import Loading from '../../component/loading/Loading'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Track from "../../component/track/Track";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, fireDB } from "../../firebase/Firebase";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
 
 export default function SignUp() {
     const [loading,setloading] = useState(false)
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate()
     
     const sigup = async () =>{
         setloading(true);
         if(name === '' || email === '' || password === ''){
             setloading(false)
             return toast.error("All fields are required");
+        }
+        
+        try {
+          const users = await createUserWithEmailAndPassword(auth,email,password);
+          console.log(users);
+          const user={
+            name:name,
+            uid:users.user.uid,
+            email:users.user.email,
+            time:Timestamp.now()
+          }
+          
+          const userRef = collection(fireDB,'users');
+          // console.log(userRef);
+          await addDoc(userRef,user);
+          setloading(false)
+          return navigate('/')
+        } catch (error) {
+          console.log(error);
+          setloading(false)
+          
         }
     }
   return (
