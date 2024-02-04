@@ -67,23 +67,35 @@ export default function MobileMenu() {
                     </a>
                   </div>
 
-                  <div className="flow-root">
-                    {Object.keys(user).length===0?<Link
+                  {Object.keys(user).length === 0?<div className="flow-root">
+                    <Link
                       to={"/signup"}
                       className="block p-2 -m-2 font-medium text-gray-900"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Signup
-                    </Link>:null}
-                  </div>      
+                    </Link>
+                  </div>:null}    
 
                   <div className="flow-root">
-                    <Link to={('/login')}
+                    {Object.keys(user).length === 0?<Link to={('/login')}
                       className="block p-2 -m-2 font-medium text-gray-900 cursor-pointer"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Login
-                    </Link>
+                    </Link>:<button
+                    
+                    className="block p-2 -m-2 font-medium text-gray-900 cursor-pointer"
+                      style={{ color: mode === "dark" ? "white" : "" }} onClick={() =>{ 
+                      setUser({})
+                      // console.log(user); // Clears user data
+                      handelUser({});  
+                      return navigate('/login')
+                    }}
+                    
+                  >
+                    Logout
+                  </button>}
                   </div>
                   <div className="flow-root">
                     <a

@@ -30,6 +30,7 @@ export default function Login() {
         }
         try {
             const res = await signInWithEmailAndPassword(auth,email,password);
+            // console.log(r);
             const db= getFirestore();
             const userref = doc(db,'users','9K3uQ9IitO2hknJm4QR7');
             const dataSnap = (await getDoc(userref)).data();
