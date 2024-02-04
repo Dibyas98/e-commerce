@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import Loading from '../../component/loading/Loading'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
     const [loading,setloading] = useState(false)
@@ -68,9 +69,9 @@ export default function SignUp() {
         <div>
           <h2 className="text-white">
             Have an account{" "}
-            {/* <Link className="font-bold text-red-500 " to={"/login"}>
+            <Link className="font-bold text-red-500 " to={"/login"}>
               Login
-            </Link> */}
+            </Link>
           </h2>
         </div>
       </div>

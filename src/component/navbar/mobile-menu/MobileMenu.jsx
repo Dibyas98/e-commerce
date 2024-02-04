@@ -2,6 +2,7 @@ import React, { useState, Fragment, useContext } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { myContext } from "../../../context/Data";
 import { RxCross2 } from 'react-icons/rx'
+import { Link } from "react-router-dom";
 
 export default function MobileMenu() {
   const {mode,open,setOpen} = useContext(myContext)
@@ -49,13 +50,13 @@ export default function MobileMenu() {
                   </button>
                 </div>
                 <div className="px-4 py-6 space-y-6 border-t border-gray-200">
-                  <a
-                    to={"/allproducts"}
+                  <Link
+                    to={"/"}
                     className="text-sm font-medium text-gray-900 "
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
-                    All Products
-                  </a>
+                   Home
+                  </Link>
                   <div className="flow-root">
                     <a
                       to={"/order"}
@@ -67,22 +68,22 @@ export default function MobileMenu() {
                   </div>
 
                   <div className="flow-root">
-                    <a
-                      to={"/dashboard"}
+                    <Link
+                      to={"/signup"}
                       className="block p-2 -m-2 font-medium text-gray-900"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
-                      admin
-                    </a>
+                      Signup
+                    </Link>
                   </div>
 
                   <div className="flow-root">
-                    <a
+                    <Link to={('/login')}
                       className="block p-2 -m-2 font-medium text-gray-900 cursor-pointer"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
-                      Logout
-                    </a>
+                      Login
+                    </Link>
                   </div>
                   <div className="flow-root">
                     <a
