@@ -23,20 +23,20 @@ export default function Menu() {
                   >
                     Order
                   </Link>
-                  <a
-                    to={"/dashboard"}
+                  <Link
+                    to={"/signup"}
                     className="text-sm font-medium text-gray-700 "
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
-                    Admin
-                  </a>
+                    Signup
+                  </Link>
 
-                  <a
+                  <Link to={'/login'}
                     className="text-sm font-medium text-gray-700 cursor-pointer "
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
-                    Logout
-                  </a>
+                    Login
+                  </Link>
                 </div>
                 <div className="hidden lg:ml-8 lg:flex">
                   <a href="#" className="flex items-center text-gray-700 ">
