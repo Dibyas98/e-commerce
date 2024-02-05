@@ -36,7 +36,7 @@ export default function Data({ children }) {
     fetchData(arg).then(data => dispatch(getSearchData(data)))
   }
 
-
+ 
 
 
 

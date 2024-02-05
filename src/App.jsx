@@ -9,6 +9,8 @@ import Cart from './pages/cart/Cart'
 import SignUp from './pages/signup/SignUp'
 import Login from './pages/login/Login'
 import Order from './pages/Order/Order'
+import AllProduct from './pages/allproducts/AllProduct'
+import ProductPage from './pages/product-page/ProductPage'
 
 function App() {
   
@@ -35,7 +37,19 @@ function App() {
         {
           path:'/order',
           element:<Order></Order>
+        },
+        {
+          path:'/product/:id',
+          element:<AllProduct></AllProduct>,
+          children:[
+            
+          ]
+        },
+        {
+          path:'/product/:id/:name',
+          element:<ProductPage></ProductPage>
         }
+        
 
       ]
 
