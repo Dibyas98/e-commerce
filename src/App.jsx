@@ -8,6 +8,7 @@ import Home from './pages/home/Home'
 import Cart from './pages/cart/Cart'
 import SignUp from './pages/signup/SignUp'
 import Login from './pages/login/Login'
+import Order from './pages/Order/Order'
 
 function App() {
   
@@ -30,6 +31,10 @@ function App() {
         {
           path:'/login',
           element:<Login></Login>
+        },
+        {
+          path:'/order',
+          element:<Order></Order>
         }
 
       ]

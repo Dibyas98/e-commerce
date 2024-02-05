@@ -1,13 +1,19 @@
 import React, { createContext, useState } from "react";
+import { fetchData } from "../api/api";
+import { useDispatch } from "react-redux";
+import { getSearchData } from "../redux/searchslice";
 
 export const myContext = createContext();
 export default function Data({ children }) {
+  const dispatch = useDispatch();
   const [mode, setMode] = useState("light");
   const [open, setOpen] = useState(false);
+  const[order,setOrder] = useState([]);
   const [user, setUser] = useState(()=>{
     const storeData = localStorage.getItem('user');
     return storeData? JSON.parse(storeData):{}
   });
+  const [search,setSearch] = useState('');
 
   const handelUser = (arg)=>{
     localStorage.setItem('user',JSON.stringify(arg))
@@ -25,6 +31,10 @@ export default function Data({ children }) {
       document.body.style.backgroundColor = "white";
     }
   };
+  const handelSearch = (arg) =>{
+    setSearch(arg)
+    fetchData(arg).then(data => dispatch(getSearchData(data)))
+  }
 
 
 
@@ -39,7 +49,10 @@ export default function Data({ children }) {
         setOpen,
         user,
         setUser,
-        handelUser
+        handelUser,
+        order,
+        handelSearch,
+        search
       }}
     >
       {children}
