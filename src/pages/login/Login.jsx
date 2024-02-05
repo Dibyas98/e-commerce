@@ -13,7 +13,6 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const {setUser,handelUser} = useContext(myContext);
     const navigate = useNavigate()
-    
 
     
     
@@ -30,10 +29,10 @@ export default function Login() {
         }
         try {
             const res = await signInWithEmailAndPassword(auth,email,password);
-            // console.log(r);
-            const db= getFirestore();
-            const userref = doc(db,'users','9K3uQ9IitO2hknJm4QR7');
+            console.log(res.user.uid);
+            const userref = doc(fireDB,'users',res.user.uid);
             const dataSnap = (await getDoc(userref)).data();
+            console.log(dataSnap);
             setUser(dataSnap)
             handelUser(dataSnap)
             setloading(false);
