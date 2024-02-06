@@ -7,14 +7,14 @@ import { myContext } from '../../context/Data';
 export default function AllProduct() {
     const {mode}= useContext(myContext);
     const param = useParams();
-   
+    console.log(apidata.data);
     
     
   return (
-    <div className='flex flex-col w-screen h-auto gap-4 py-11 ' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
+    <div className='flex flex-col h-auto gap-4 py-11 ' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
       {
         apidata.data.map((prod) =>{
-            return <Card key={prod.asin}></Card>
+            return <Card key={prod.asin} prod={prod}></Card>
         })
       }
     </div>

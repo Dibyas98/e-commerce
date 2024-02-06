@@ -4,7 +4,7 @@ import { myContext } from '../../context/Data'
 export default function CartProduct() {
     const {mode} = useContext(myContext)
   return (
-    <div className="rounded-lg md:w-2/3 ">
+    <div className="w-full rounded-lg ">
         <div className="justify-between p-6 mb-6 bg-white border rounded-lg drop-shadow-xl sm:flex sm:justify-start" style={{ backgroundColor: mode === 'dark' ? 'rgb(32 33 34)' : '', color: mode === 'dark' ? 'white' : '', }}>
           <img src="https://dummyimage.com/400x400" alt="product-image" className="w-full rounded-lg sm:w-40" />
           <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
