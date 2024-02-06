@@ -10,20 +10,20 @@ export default function ProductPage() {
     console.log(params);
     // const products = useSelector((store) => store.search);
     const productDetails = apidata.data.find((ent) => ent.asin == params.id)
-    console.log(productDetails);
+    window.scrollTo(0, 0);
     
   return (
     <section className="overflow-hidden text-gray-600 body-font">
-                <div className="container px-5 py-32 mx-auto">
-                    <div className="flex flex-wrap mx-auto lg:w-4/5">
+                <div className="container px-5 py-16 mx-auto">
+                    <div className="flex justify-center gap-5 mx-auto jflex-wrap lg:w-4/5">
                         <img
                             alt="ecommerce"
-                            className="object-cover object-center w-full h-64 rounded lg:w-1/2 lg:h-auto"
-                            src={productDetails.image}
+                            className="object-contain object-center w-full h-32 lg:w-1/5 lg:h-auto"
+                            src={productDetails.image} style={{borderRadius:'30px'}}
                         />
                         <div className="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
                             <h2 className="text-sm tracking-widest text-gray-500 title-font">
-                                BRAND NAME
+                                BRAND NAME 
                             </h2>
                             <h1 className="mb-1 text-3xl font-medium text-gray-900 title-font">
                                 {productDetails.title}

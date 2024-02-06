@@ -7,7 +7,7 @@ export default function Card({ prod }) {
     return (
         <Link to={`/product/${prod.asin}/${prod.title}`} className='flex w-1/2 h-auto gap-3 mx-auto ' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
             <div className='flex justify-center w-36'>
-                <img src={prod.image} alt="" />
+                <img src={prod.image} className='rounded-2xl' alt="" />
             </div>
             <div className='flex flex-col gap-2 py-3'>
                 <h1>{prod.title}</h1>

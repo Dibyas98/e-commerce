@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
 import { myContext } from '../../../context/Data'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export default function Cart() {
   const {mode}= useContext(myContext)
+  const cartNumber = useSelector((store) => store.cart.cartdata)
   return (
     <div className="flow-root ml-4 lg:ml-6">
     <Link
@@ -30,7 +32,7 @@ export default function Cart() {
         className="ml-2 text-sm font-medium text-gray-700 group-"
         style={{ color: mode === "dark" ? "white" : "" }}
       >
-        0
+        {cartNumber.length}
       </span>
       <span className="sr-only">items in cart, view bag</span>
     </Link>
