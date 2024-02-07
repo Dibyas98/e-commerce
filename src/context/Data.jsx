@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react";
 import { fetchData } from "../api/api";
 import { useDispatch } from "react-redux";
 import { getSearchData } from "../redux/searchslice";
-import { getCartdata } from "../redux/cartslice";
+import { deleteCartData, getCartdata } from "../redux/cartslice";
 
 export const myContext = createContext();
 export default function Data({ children }) {
@@ -51,6 +51,10 @@ export default function Data({ children }) {
     }
   }
 
+  const handelCartDelete =  (data)=>{
+    dispatch(deleteCartData(data))
+  }
+
  
 
 
@@ -68,7 +72,8 @@ export default function Data({ children }) {
         order,
         handelSearch,
         search,
-        handelAddCart
+        handelAddCart,
+        handelCartDelete
       }}
     >
       {children}

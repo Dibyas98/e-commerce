@@ -24,46 +24,49 @@ export default function CartTotal({total}) {
           theme: "colored",
         })
       }
-    }
 
-    const addressInfo = {
-      name,
-      address,
-      pincode,
-      phoneNumber,
-      date: new Date().toLocaleString(
-        "en-US",
-        {
-          month: "short",
-          day: "2-digit",
-          year: "numeric",
+
+      const addressInfo = {
+        name,
+        address,
+        pincode,
+        phoneNumber,
+        date: new Date().toLocaleString(
+          "en-US",
+          {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+          }
+        )
+      }
+  
+      console.log(addressInfo)
+  
+      var options = {
+        key: "rzp_test_eZp7Hm4J0YB3rD",
+        key_secret: "gIYblgfhjV785qtqeEkrFNMN",
+        amount: parseInt(parseFloat(total+(total*(1/20))).toFixed(2)*100),
+        currency: "INR",
+        order_receipt: 'order_rcptid_' + name,
+        name: "E-Bharat",
+        description: "for testing purpose",
+        handler: function (response) {
+            console.log(response)
+            toast.success('Payment Successful')
+        },
+    
+        theme: {
+            color: "#3399cc"
         }
-      )
+    };
+    
+    var pay = new window.Razorpay(options);
+    pay.open();
+    console.log(pay)
     }
 
-    console.log(addressInfo)
-
-  //   var options = {
-  //     key: "",
-  //     key_secret: "",
-  //     amount: parseInt(1 * 100),
-  //     currency: "INR",
-  //     order_receipt: 'order_rcptid_' + name,
-  //     name: "E-Bharat",
-  //     description: "for testing purpose",
-  //     handler: function (response) {
-  //         console.log(response)
-  //         toast.success('Payment Successful')
-  //     },
-  
-  //     theme: {
-  //         color: "#3399cc"
-  //     }
-  // };
-  
-  // var pay = new window.Razorpay(options);
-  // pay.open();
-  // console.log(pay)
+   
 
 
     

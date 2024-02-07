@@ -36,7 +36,7 @@ export default function Cart() {
         <div className="flex-col justify-center md:w-2/3">
           {cartList.length > 0 ? (
             cartList.map((ele) => {
-              return <CartProduct key={ele.asin} />;
+              return <CartProduct key={ele.asin} prod={ele}/>;
             })
           ) : (
             <h1>No Product Add</h1>
