@@ -39,7 +39,8 @@ export default function Data({ children }) {
 
   };
   const handelSearch = (arg) =>{
-    setSearch(arg)
+    // setSearch(arg)
+   
     fetchData(arg).then(data => dispatch(getSearchData(data)))
   }
 
