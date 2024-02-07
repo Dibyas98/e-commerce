@@ -5,7 +5,7 @@ import { myContext } from '../../../context/Data'
 export default function Card({ prod }) {
     const { mode } = useContext(myContext)
     return (
-        <Link to={`/product/${prod.asin}/${prod.title}`} className='flex w-1/2 h-auto gap-3 mx-auto ' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
+        <Link to={`/product/${prod.asin}/${prod.title}`} className='flex w-full px-5 h-auto gap-3 mx-auto sm:w-1/2' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
             <div className='flex justify-center w-36'>
                 <img src={prod.image} className='rounded-2xl' alt="" />
             </div>
