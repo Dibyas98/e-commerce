@@ -12,7 +12,7 @@ export default function Cart() {
     if (cartList.length > 0) {
       let total = 0;
       cartList.forEach((ele) => {
-        let bal = parseFloat(ele.price.split("$")[1]); // Convert to number
+        let bal = parseFloat(ele[1].qnt*(ele[0].price.split("$")[1])); // Convert to number
         total += bal;
       });
       setTotalAmount(total);

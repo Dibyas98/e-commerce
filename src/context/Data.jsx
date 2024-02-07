@@ -48,7 +48,7 @@ export default function Data({ children }) {
     if(Object.keys(user).length == 0){
       alert ('You are not login');
     }else{
-      dispatch(getCartdata(data));
+      dispatch(getCartdata([data,{qnt:1}]));
     }
   }
 
