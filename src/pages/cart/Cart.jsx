@@ -2,8 +2,7 @@ import React, { useContext, useState,useEffect } from "react";
 import { myContext } from "../../context/Data";
 import CartProduct from "./CartProduct";
 import CartTotal from "./CartTotal";
-import { auth, fireDB } from "../../firebase/Firebase";
-import { Timestamp,doc,setDoc } from "firebase/firestore";
+
 import { useSelector } from "react-redux";
 
 export default function Cart() {
@@ -22,17 +21,7 @@ export default function Cart() {
     } else {
       setTotalAmount(0); // Reset total amount if cart is empty
     }
-    console.log(cartList);
-    const carD= {...cartList}
-    async function cartToDatabase(){
-      try {
-        await setDoc(doc(fireDB,'cart',user.uid),carD)
-      } catch (error) {
-      console.log(error);
-      }
-      
-    }
-    cartToDatabase()
+  
   }, [cartList]); // Run this effect whenever cartList changes
 // console.log(user.uid);
   return (

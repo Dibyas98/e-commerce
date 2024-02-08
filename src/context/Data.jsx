@@ -50,11 +50,16 @@ export default function Data({ children }) {
     }else{
       dispatch(getCartdata([data,{qnt:1}]));
     }
+
+
+    
   }
 
   const handelCartDelete =  (data)=>{
     dispatch(deleteCartData(data))
   }
+
+  
 
  
 
