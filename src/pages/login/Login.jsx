@@ -6,6 +6,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, fireDB } from '../../firebase/Firebase';
 import { Firestore, collection, doc, getDoc, getFirestore } from 'firebase/firestore';
+import { useDispatch } from 'react-redux';
+import { getCartLogin } from '../../redux/cartslice';
 
 export default function Login() {
     const [loading,setloading] = useState(false)
@@ -13,6 +15,8 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const {setUser,handelUser} = useContext(myContext);
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    
 
     
     
@@ -32,7 +36,11 @@ export default function Login() {
             console.log(res.user.uid);
             const userref = doc(fireDB,'users',res.user.uid);
             const dataSnap = (await getDoc(userref)).data();
-            console.log(dataSnap);
+            // console.log(dataSnap);
+            const cart = doc(fireDB,'cart',res.user.uid);
+            const cartSnap =(await getDoc(cart)).data();
+            // dispatch(getCartLogin(cartSnap))
+            // console.log(cartSnap);
             setUser(dataSnap)
             handelUser(dataSnap)
             setloading(false);

@@ -2,11 +2,14 @@ import React, { useContext, useState,useEffect } from "react";
 import { myContext } from "../../context/Data";
 import CartProduct from "./CartProduct";
 import CartTotal from "./CartTotal";
+import { auth, fireDB } from "../../firebase/Firebase";
+import { Timestamp,doc,setDoc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 
 export default function Cart() {
-  const { mode } = useContext(myContext);
+  const { mode,user } = useContext(myContext);
   const cartList = useSelector((store) => store.cart.cartdata);
+  const cartData = useSelector((store) => store.cart);
   const [totalAmount, setTotalAmount] = useState(0);
   useEffect(() => {
     if (cartList.length > 0) {
@@ -19,9 +22,19 @@ export default function Cart() {
     } else {
       setTotalAmount(0); // Reset total amount if cart is empty
     }
+    console.log(cartList);
+    const carD= {...cartList}
+    async function cartToDatabase(){
+      try {
+        await setDoc(doc(fireDB,'cart',user.uid),carD)
+      } catch (error) {
+      console.log(error);
+      }
+      
+    }
+    cartToDatabase()
   }, [cartList]); // Run this effect whenever cartList changes
-
-  console.log(totalAmount);
+// console.log(user.uid);
   return (
     <div
       className="h-auto pt-5 bg-gray-100 "
@@ -36,7 +49,7 @@ export default function Cart() {
         <div className="flex-col justify-center md:w-2/3">
           {cartList.length > 0 ? (
             cartList.map((ele) => {
-              return <CartProduct key={ele.asin} prod={ele}/>;
+              return <CartProduct key={ele[0].asin} prod={ele}/>;
             })
           ) : (
             <h1>No Product Add</h1>

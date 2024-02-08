@@ -7,7 +7,7 @@ import { myContext } from '../../context/Data';
 export default function AllProduct() {
     const {mode}= useContext(myContext);
     const param = useParams();
-    console.log(apidata.data);
+    // console.log(apidata.data);
     
     
   return (

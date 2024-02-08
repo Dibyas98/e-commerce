@@ -7,6 +7,7 @@ import Track from "../../component/track/Track";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, fireDB } from "../../firebase/Firebase";
 import { Timestamp,doc,setDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
 export default function SignUp() {
     const [loading,setloading] = useState(false)
@@ -14,7 +15,8 @@ export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate()
-    // console.log(fireDB);
+    const cart= useSelector((store) => store.cart.cartdata)
+    console.log(cart);
     const sigup = async () =>{
         setloading(true);
         if(name === '' || email === '' || password === ''){
