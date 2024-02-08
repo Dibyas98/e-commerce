@@ -7,10 +7,10 @@ import { apidata } from '../../apidata';
 export default function ProductPage() {
     const {mode,handelAddCart} = useContext(myContext)
     const params = useParams();
-    // const products = useSelector((store) => store.search);
-    const productDetails = apidata.data.find((ent) => ent.product_id == params.id)
+    const products = useSelector((store) => store.search.searchData);
+    const productDetails = products.find((ent) => ent.product_id == params.id)
     // console.log(params);
-    // console.log(productDetails);
+    console.log(productDetails);
     window.scrollTo(0, 0);
     
     

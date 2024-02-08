@@ -46,7 +46,7 @@ function App() {
         {
           path:'/:id/:name',
           element:<ProductPage></ProductPage>,
-          errorElement: <Home/>
+          // errorElement: <Home/>
         },
 
         
