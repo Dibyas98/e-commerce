@@ -39,7 +39,8 @@ export default function Filter() {
                   if(searchRef.current.value.length === 0){
                     return;
                   }
-                  return navigate(`/product/${searchRef.current.value}`);
+                  return navigate(`/product/${searchRef.current.value}`)
+                  ;
                 }}
                 className="flex items-center justify-center bg-red-500 rounded-md w-11 hover:bg-emerald-700"
               >

@@ -40,8 +40,8 @@ export default function Data({ children }) {
   };
   const handelSearch = (arg) =>{
     // setSearch(arg)
-   
-    fetchData(arg).then(data => dispatch(getSearchData(data)))
+   console.log(arg);
+    fetchData(arg).then(dat => dispatch(getSearchData(dat)))
   }
 
   const handelAddCart = (data) =>{
@@ -61,7 +61,7 @@ export default function Data({ children }) {
 
   useEffect(()=>{
     const handelCartOnLoading = ()=>{
-      const storecart = JSON.parse(localStorage.getItem('cart'));
+      const storecart = localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):[];
       dispatch(getcartLoc(storecart))
     }
     handelCartOnLoading();

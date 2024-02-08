@@ -41,14 +41,14 @@ function App() {
         {
           path:'/product/:id',
           element:<AllProduct></AllProduct>,
-          children:[
-            
-          ]
+          // errorElement: <Home/>
         },
         {
-          path:'/product/:id/:name',
-          element:<ProductPage></ProductPage>
-        }
+          path:'/:id/:name',
+          element:<ProductPage></ProductPage>,
+          errorElement: <Home/>
+        },
+
         
 
       ]

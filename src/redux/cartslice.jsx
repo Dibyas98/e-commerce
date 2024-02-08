@@ -26,8 +26,8 @@ const cartslice = createSlice({
     initialState:initialState,
     reducers:{
         getCartdata: (state,actions)=>{
-            const existingItem = state.cartdata.find(ele => ele.asin === actions.payload.asin);
-            console.log(existingItem);
+            const existingItem = state.cartdata.find(ele => ele.product_id === actions.payload.product_id);
+            // console.log(existingItem);
             if (existingItem) {
                 // Increment quantity if the item already exists in the cart
                 
@@ -42,7 +42,7 @@ const cartslice = createSlice({
     localStorage.setItem('cart',JSON.stringify(state.cartdata))
             }
             
-            console.log(state.cartdata);
+            // console.log(state.cartdata);
             
     
     
@@ -60,7 +60,7 @@ const cartslice = createSlice({
         // console.log(actions.payload);
         },
         deleteCartData:(state,actions) =>{
-            state.cartdata = state.cartdata.filter((ele)=> ele.asin != actions.payload.asin)
+            state.cartdata = state.cartdata.filter((ele)=> ele.product_id != actions.payload.product_id)
             // console.log(actions);
             const carD= {...state.cartdata}
             cartToDatabase(carD)

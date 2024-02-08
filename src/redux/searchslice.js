@@ -9,7 +9,9 @@ const searchSlice = createSlice({
   initialState: initialState,  // Use the correct initial state object
   reducers: {
     getSearchData: (state, action) => {
+      
       state.searchData = action.payload.data;  // Update the searchData property
+      // console.log(state.searchData);
     }
   }
 });

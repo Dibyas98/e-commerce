@@ -8,7 +8,9 @@ export default function ProductPage() {
     const {mode,handelAddCart} = useContext(myContext)
     const params = useParams();
     // const products = useSelector((store) => store.search);
-    const productDetails = apidata.data.find((ent) => ent.asin == params.id)
+    const productDetails = apidata.data.find((ent) => ent.product_id == params.id)
+    // console.log(params);
+    // console.log(productDetails);
     window.scrollTo(0, 0);
     
     
@@ -19,14 +21,14 @@ export default function ProductPage() {
                         <img
                             alt="ecommerce"
                             className="object-contain object-center w-full h-32 lg:w-1/5 lg:h-auto"
-                            src={productDetails.image} style={{borderRadius:'30px'}}
+                            src={productDetails.product_photos[0]} style={{borderRadius:'30px'}}
                         />
                         <div className="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
                             <h2 className="text-sm tracking-widest text-gray-500 title-font">
                                 BRAND NAME 
                             </h2>
                             <h1 className="mb-1 text-3xl font-medium text-gray-900 title-font">
-                                {productDetails.title}
+                                {productDetails.product_title}
                             </h1>
                             <div className="flex mb-4">
                                 <span className="flex items-center">
@@ -85,7 +87,7 @@ export default function ProductPage() {
                                     >
                                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                                     </svg>
-                                    <span className="ml-3 text-gray-600">{productDetails.rating_count} Reviews</span>
+                                    <span className="ml-3 text-gray-600">{productDetails.offer.store_rating} Reviews</span>
                                 </span>
                                 <span className="flex py-2 pl-3 ml-3 border-l-2 border-gray-200 space-x-2s">
                                     <a className="text-gray-500">
@@ -127,16 +129,12 @@ export default function ProductPage() {
                                 </span>
                             </div>
                             <p className="pb-5 mb-5 leading-relaxed border-b-2">
-                                Fam locavore kickstarter distillery. Mixtape chillwave tumeric
-                                sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps
-                                cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine
-                                tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean
-                                shorts keytar banjo tattooed umami cardigan.
+                               {productDetails.product_description}
                             </p>
                          
                             <div className="flex">
                                 <span className="text-2xl font-medium text-gray-900 title-font">
-                                    {productDetails.price}
+                                    {productDetails.offer.price}
                                 </span>
                                 <button className="flex px-6 py-2 ml-auto text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600" onClick={()=>handelAddCart(productDetails)}>
                                     Add To Cart

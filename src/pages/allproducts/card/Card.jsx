@@ -4,24 +4,27 @@ import { Link, useNavigate } from 'react-router-dom'
 import { myContext } from '../../../context/Data'
 export default function Card({ prod }) {
     const { mode } = useContext(myContext)
+    const proname = prod.product_title.split(/[ \/]+/).join('%');
+
+
     return (
-        <Link to={`/product/${prod.asin}/${prod.title}`} className='flex w-full px-5 h-auto gap-3 mx-auto sm:w-1/2' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
+        <Link to={`/${prod.product_id}/${proname}`} className='flex w-full px-5 h-auto gap-8 mx-auto sm:w-1/2' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
             <div className='flex justify-center w-36'>
-                <img src={prod.image} className='rounded-2xl' alt="" />
+                <img src={prod.product_photos[0]} className='rounded-2xl' alt="" />
             </div>
             <div className='flex flex-col gap-2 py-3'>
-                <h1>{prod.title}</h1>
+                <h1>{prod.product_title}</h1>
                 <div className='flex w-auto gap-2'>
-                    <Rate value={prod.stars} />
-                    <h1>{prod.
+                    {prod.offer.store_rating?<Rate value={prod.offer.store_rating} />:null}
+                    {/* <h1>{prod.
                         rating_count
-                    }+</h1>
+                    }+</h1> */}
                 </div>
-                <h1>{prod.price} {prod.original_price
-                    ? <span className='px-2 line-through'>M.R.P: {prod.original_price
+                <h1>{prod.offer.price} {prod.original_price
+                    ? <span className='px-2 line-through'>M.R.P: {prod.offer.original_price
                     }</span> : null}</h1>
-                <p>Save Extra with NO Cost EMI</p>
-                <p>Free Delivery</p>
+                <p>shipping:- {prod.offer.shipping}</p>
+                {/* <p>Free Delivery</p> */}
             </div>
         </Link>
     )
