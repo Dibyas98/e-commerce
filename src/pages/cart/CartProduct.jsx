@@ -6,12 +6,12 @@ export default function CartProduct({prod}) {
   return (
     <div className="w-full rounded-lg ">
         <div className="justify-between p-6 mb-6 bg-white border rounded-lg drop-shadow-xl sm:flex sm:justify-start" style={{ backgroundColor: mode === 'dark' ? 'rgb(32 33 34)' : '', color: mode === 'dark' ? 'white' : '', }}>
-          <img src={prod[0].image} alt="product-image" className="w-full rounded-lg sm:w-40" />
+          <img src={prod.image} alt="product-image" className="w-full rounded-lg sm:w-40" />
           <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
             <div className="mt-5 sm:mt-0">
-              <h2 className="text-lg font-bold text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>{prod[0].title}</h2>
-              <h2 className="text-sm text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>Quantity:-{prod[1].qnt}</h2>
-              <p className="mt-1 text-xs font-semibold text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>{prod[0].price}</p>
+              <h2 className="text-lg font-bold text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>{prod.title}</h2>
+              <h2 className="text-sm text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}></h2>
+              <p className="mt-1 text-xs font-semibold text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>{prod.price}</p>
             </div>
             <div className="flex justify-between mt-4 sm:space-y-6 sm:mt-0 sm:block sm:space-x-6" >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6" onClick={()=>{handelCartDelete(prod)}}>

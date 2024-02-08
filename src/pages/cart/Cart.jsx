@@ -14,13 +14,15 @@ export default function Cart() {
     if (cartList.length > 0) {
       let total = 0;
       cartList.forEach((ele) => {
-        let bal = parseFloat(ele[1].qnt*(ele[0].price.split("$")[1])); // Convert to number
+        console.log(ele.price.split("$"));
+        let bal = parseFloat(ele.price.split("$")[1]); // Convert to number
         total += bal;
       });
       setTotalAmount(total);
     } else {
       setTotalAmount(0); // Reset total amount if cart is empty
     }
+    console.log(totalAmount);
   
   }, [cartList]); // Run this effect whenever cartList changes
 // console.log(user.uid);
@@ -38,7 +40,7 @@ export default function Cart() {
         <div className="flex-col justify-center md:w-2/3">
           {cartList.length > 0 ? (
             cartList.map((ele) => {
-              return <CartProduct key={ele[0].asin} prod={ele}/>;
+              return <CartProduct key={ele.asin} prod={ele}/>;
             })
           ) : (
             <h1>No Product Add</h1>

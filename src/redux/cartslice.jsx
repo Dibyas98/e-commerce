@@ -26,34 +26,50 @@ const cartslice = createSlice({
     initialState:initialState,
     reducers:{
         getCartdata: (state,actions)=>{
-            const existingItem = state.cartdata.find(ele => ele[0].asin === actions.payload[0].asin);
-
+            const existingItem = state.cartdata.find(ele => ele.asin === actions.payload.asin);
+            console.log(existingItem);
             if (existingItem) {
                 // Increment quantity if the item already exists in the cart
-                existingItem[1].qnt += 1;
+                
+                alert('already add')
+                return
                 // console.log(actions); // Log the modified actions object
             } else {
                 // Add the item to the cart with an initial quantity if it doesn't exist
                 state.cartdata = [...state.cartdata, actions.payload];
+                const carD= {...state.cartdata}
+                cartToDatabase(carD)
+    localStorage.setItem('cart',JSON.stringify(state.cartdata))
             }
-            const carD= {...state.cartdata}
+            
+            console.log(state.cartdata);
+            
     
-    cartToDatabase(carD)
+    
             
         },
         getCartLogin:(state,actions) =>{
-            console.log(actions.payload);
-           state.cartdata= [...actions.payload]
-           console.log(state.cartdata);
+            // console.log(actions.payload);
+            Object.values(actions.payload).forEach((value)=>{
+                console.log(value);
+                state.cartdata=[...state.cartdata,value]
+            })
+            localStorage.setItem('cart',JSON.stringify(state.cartdata))
+        //    state.cartdata= [...actions.payload]
+        //    console.log(state.cartdata);
         // console.log(actions.payload);
         },
         deleteCartData:(state,actions) =>{
-            state.cartdata = state.cartdata.filter((ele)=> ele[0].asin != actions.payload[0].asin)
+            state.cartdata = state.cartdata.filter((ele)=> ele.asin != actions.payload.asin)
             // console.log(actions);
             const carD= {...state.cartdata}
             cartToDatabase(carD)
+            localStorage.setItem('cart',JSON.stringify(state.cartdata))
+        },
+        getcartLoc:(state,actions) =>{
+            state.cartdata = [...actions.payload]
         }
     }
 })
-export const {getCartdata,deleteCartData,getCartLogin} = cartslice.actions;
+export const {getCartdata,deleteCartData,getCartLogin,getcartLoc} = cartslice.actions;
 export default cartslice.reducer;

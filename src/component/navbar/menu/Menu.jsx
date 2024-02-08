@@ -42,7 +42,8 @@ export default function Menu() {
                     className="text-sm font-medium text-gray-700 " onClick={() =>{ 
                       setUser({})
                       // console.log(user); // Clears user data
-                      handelUser({});  
+                      handelUser({}); 
+                      localStorage.setItem('cart',JSON.stringify([])) 
                       return navigate('/login')
                     }}
                     style={{ color: mode === "dark" ? "white" : "" }}

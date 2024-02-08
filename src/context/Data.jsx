@@ -1,8 +1,8 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { fetchData } from "../api/api";
 import { useDispatch } from "react-redux";
 import { getSearchData } from "../redux/searchslice";
-import { deleteCartData, getCartdata } from "../redux/cartslice";
+import { deleteCartData, getCartdata, getcartLoc } from "../redux/cartslice";
 
 export const myContext = createContext();
 export default function Data({ children }) {
@@ -48,7 +48,7 @@ export default function Data({ children }) {
     if(Object.keys(user).length == 0){
       alert ('You are not login');
     }else{
-      dispatch(getCartdata([data,{qnt:1}]));
+      dispatch(getCartdata(data));
     }
 
 
@@ -59,7 +59,14 @@ export default function Data({ children }) {
     dispatch(deleteCartData(data))
   }
 
+  useEffect(()=>{
+    const handelCartOnLoading = ()=>{
+      const storecart = JSON.parse(localStorage.getItem('cart'));
+      dispatch(getcartLoc(storecart))
+    }
+    handelCartOnLoading();
   
+  },[user])
 
  
 
