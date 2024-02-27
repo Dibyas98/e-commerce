@@ -33,17 +33,19 @@ export default function Login() {
         }
         try {
             const res = await signInWithEmailAndPassword(auth,email,password);
-            console.log(res.user.uid);
+            // console.log(res.user.uid);
             const userref = doc(fireDB,'users',res.user.uid);
             const dataSnap = (await getDoc(userref)).data();
-            // console.log(dataSnap);
+            console.log(dataSnap);
+            
+            setUser(dataSnap)
+            console.log(dataSnap);
+            handelUser(dataSnap)
+            setloading(false);
             const cart = doc(fireDB,'cart',res.user.uid);
             const cartSnap =(await getDoc(cart)).data();
             dispatch(getCartLogin(cartSnap))
-            // console.log(cartSnap);
-            setUser(dataSnap)
-            handelUser(dataSnap)
-            setloading(false);
+            console.log(cartSnap);
             return navigate('/')
             
         } catch (error) {

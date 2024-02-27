@@ -11,7 +11,9 @@ const user = JSON.parse(localStorage.getItem('user'));
 
     async function cartToDatabase(carD){
       try {
+        // console.log(user.uid);
         await setDoc(doc(fireDB,'cart',user.uid),carD)
+        console.log('to da');
       } catch (error) {
       console.log(error);
       }
@@ -51,7 +53,6 @@ const cartslice = createSlice({
         getCartLogin:(state,actions) =>{
             // console.log(actions.payload);
             Object.values(actions.payload).forEach((value)=>{
-                console.log(value);
                 state.cartdata=[...state.cartdata,value]
             })
             localStorage.setItem('cart',JSON.stringify(state.cartdata))
@@ -68,8 +69,12 @@ const cartslice = createSlice({
         },
         getcartLoc:(state,actions) =>{
             state.cartdata = [...actions.payload]
+        },
+        getEmptycart:(state,actions)=>{
+            // state.cartdata= actions.payload
+            // cartToDatabase({})
         }
     }
 })
-export const {getCartdata,deleteCartData,getCartLogin,getcartLoc} = cartslice.actions;
+export const {getCartdata,deleteCartData,getCartLogin,getcartLoc,getEmptycart} = cartslice.actions;
 export default cartslice.reducer;

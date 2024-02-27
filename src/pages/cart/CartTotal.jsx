@@ -1,13 +1,19 @@
 import React, { useContext,useState } from 'react'
 import { myContext } from '../../context/Data'
 import Modal from './Model'
+import { doc, setDoc } from 'firebase/firestore'
+import { fireDB } from '../../firebase/Firebase'
+import { useDispatch, useSelector } from 'react-redux'
+import { getEmptycart } from '../../redux/cartslice'
 
 export default function CartTotal({total}) {
-    const {mode} = useContext(myContext)
+    const {mode,user} = useContext(myContext)
     const [name, setName] = useState("")
     const [address, setAddress] = useState("");
     const [pincode, setPincode] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
+    const cartItems = useSelector((store) => store.cart.cartdata)
+    const dispatch = useDispatch()
   
   
     const buyNow = async () => {
@@ -41,8 +47,8 @@ export default function CartTotal({total}) {
         )
       }
   
-      console.log(addressInfo)
-  
+      
+      
       var options = {
         key: "rzp_test_eZp7Hm4J0YB3rD",
         key_secret: "gIYblgfhjV785qtqeEkrFNMN",
@@ -52,8 +58,32 @@ export default function CartTotal({total}) {
         name: "E-Bharat",
         description: "for testing purpose",
         handler: function (response) {
-            console.log(response)
-            toast.success('Payment Successful')
+            // console.log(response)
+            // toast.success('Payment Successful')
+            const paymentId = response.razorpay_payment_id
+            // console.log(paymentId);
+
+            const orderInfo= {}
+             orderInfo[paymentId] = {
+                cartItems,
+              addressInfo,
+              date: new Date().toLocaleString(
+                "en-US",
+                {
+                  month: "short",
+                  day: "2-digit",
+                  year: "numeric",
+                }
+              ),
+              
+            }
+            console.log(orderInfo);
+          try{
+            setDoc(doc(fireDB,'orders',user.uid),{order:orderInfo})
+            dispatch(getEmptycart([]))
+          }catch(error){
+            console.log(error);
+          }
         },
     
         theme: {
@@ -63,7 +93,7 @@ export default function CartTotal({total}) {
     
     var pay = new window.Razorpay(options);
     pay.open();
-    console.log(pay)
+    // console.log(pay)
     }
 
    

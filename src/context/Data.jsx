@@ -54,15 +54,15 @@ export default function Data({ children }) {
     dispatch(deleteCartData(data));
   };
 
-  useEffect(() => {
-    const handelCartOnLoading = () => {
-      const storecart = localStorage.getItem("cart")
-        ? JSON.parse(localStorage.getItem("cart"))
-        : [];
-      dispatch(getcartLoc(storecart));
-    };
-    handelCartOnLoading();
-  }, [user]);
+  // useEffect(() => {
+  //   const handelCartOnLoading = () => {
+  //     const storecart = localStorage.getItem("cart")
+  //       ? JSON.parse(localStorage.getItem("cart"))
+  //       : [];
+  //     dispatch(getcartLoc(storecart));
+  //   };
+  //   handelCartOnLoading();
+  // }, [user]);
 
   useEffect(() => {
     async function handelCartDataOnEveryLogin() {
