@@ -42,8 +42,8 @@ export default function Login() {
             console.log(dataSnap);
             handelUser(dataSnap)
             setloading(false);
-            const cart = doc(fireDB,'cart',res.user.uid);
-            const cartSnap =(await getDoc(cart)).data();
+            // const cart = doc(fireDB,'cart',res.user.uid);
+            // const cartSnap =(await getDoc(cart)).data();
             // dispatch(getCartLogin(cartSnap))
             // console.log(cartSnap);
             return navigate('/')
