@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Card from './card/Card';
-import { apidata } from '../../apidata';
+// import { apidata } from '../../apidata';
 import { myContext } from '../../context/Data';
 import { useSelector } from 'react-redux';
 import { getSearchData } from '../../redux/searchslice';

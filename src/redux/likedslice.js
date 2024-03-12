@@ -55,8 +55,13 @@ const likedslice = createSlice({
             localStorage.setItem('liked',JSON.stringify(actions.payload))
         },
         setLikedOnRefresh:(state,actions)=>{
+            if(actions.payload.liked){
+                state.liked = actions.payload.liked
+            }else{
+                state.liked = actions.payload
+            }
             console.log(actions);
-            state.liked = actions.payload.liked
+            
         }
 
     }

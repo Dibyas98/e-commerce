@@ -9,6 +9,7 @@ import { Firestore, collection, doc, getDoc, getFirestore } from 'firebase/fires
 import { useDispatch } from 'react-redux';
 import { getCartLogin } from '../../redux/cartslice';
 import { getLikedOnLogin } from '../../redux/likedslice';
+import { setOrderOnLogin } from '../../redux/orderslice';
 
 export default function Login() {
     const [loading,setloading] = useState(false)
@@ -48,7 +49,7 @@ export default function Login() {
             handelUser(dataSnap)
             Object.keys(cartSnap).length>0 ? dispatch(getCartLogin(cartSnap)) : null;
             Object.keys(likedSnap).length>0 ? dispatch(getLikedOnLogin(likedSnap)) : null;
-            // Object.keys(orderSnap).length>0 ? dispatch(ge(orderSnap)) : null;
+            Object.keys(orderSnap).length>0 ? dispatch(setOrderOnLogin(orderSnap)) : null;
             setloading(false);
             return navigate('/')
             

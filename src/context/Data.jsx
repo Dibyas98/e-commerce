@@ -1,21 +1,29 @@
 import React, { createContext, useEffect, useState } from "react";
 import { fetchData } from "../api/api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getSearchData } from "../redux/searchslice";
 import {
   deleteCartData,
   getCartLogin,
   getCartdata,
+  getEmptycart,
   getcartLoc,
 } from "../redux/cartslice";
 import { doc, getDoc } from "firebase/firestore";
 import { fireDB } from "../firebase/Firebase";
-import { getDeleteLiked, getLikedUpdate, setLikedLogout, setLikedOnRefresh } from "../redux/likedslice";
+import {
+  getDeleteLiked,
+  getLikedUpdate,
+  setLikedLogout,
+  setLikedOnRefresh,
+} from "../redux/likedslice";
 import Logo from "../component/navbar/logo/Logo";
+import { setOrderOnLogout, setOrderPlacedOnRefresh } from "../redux/orderslice";
 
 export const myContext = createContext();
 export default function Data({ children }) {
   const dispatch = useDispatch();
+  const [productDetails,setproductDetails]= useState({})
   const [mode, setMode] = useState(() => {
     const storemode = localStorage.getItem("mode");
     return storemode ? JSON.parse(storemode) : "light";
@@ -74,18 +82,18 @@ export default function Data({ children }) {
   const HandelCartOnLogin = () => {
     cartSnap.cart.length > 0 ? dispatch(getCartLogin(cartSnap)) : null;
   };
- 
 
   // LIKED DATA ALL FUNCTIONS
 
-  useEffect(()=>{
-    const handelLikedOnLoading = ()=>{
-      const storeLiked = localStorage.getItem('liked')
-      ?JSON.parse(localStorage.getItem('liked')):[];
-      dispatch(setLikedOnRefresh(storeLiked))
+  useEffect(() => {
+    const handelLikedOnLoading = () => {
+      const storeLiked = localStorage.getItem("liked")
+        ? JSON.parse(localStorage.getItem("liked"))
+        : [];
+      dispatch(setLikedOnRefresh(storeLiked));
     };
     handelLikedOnLoading();
-  },[])
+  }, []);
   const handelLikedData = (product, type) => {
     if (!type) {
       dispatch(getLikedUpdate(product));
@@ -93,10 +101,28 @@ export default function Data({ children }) {
       dispatch(getDeleteLiked(product));
     }
   };
-const handelLougoutLiked = ()=>{
-  console.log('h');
-  dispatch(setLikedLogout([]))
-}
+  const handelLougoutLiked = () => {
+    console.log("h");
+    dispatch(setLikedLogout([]));
+    dispatch(setOrderOnLogout([]));
+  };
+
+  // ORDER FUNCTION
+  const handelOnCompleteOrder = () => {
+    dispatch(getEmptycart([]));
+  };
+  useEffect(() => {
+    const handelOrderOnRefresh = () => {
+      const storeOrder = localStorage.getItem("order")
+        ? JSON.parse(localStorage.getItem("order"))
+        : [];
+      dispatch(setOrderPlacedOnRefresh(storeOrder));
+    };
+    handelOrderOnRefresh();
+  }, []);
+
+  // DISPLAY SINGLE PAGE DATA
+
   return (
     <myContext.Provider
       value={{
@@ -114,7 +140,9 @@ const handelLougoutLiked = ()=>{
         handelCartDelete,
         HandelCartOnLogin,
         handelLikedData,
-        handelLougoutLiked
+        handelLougoutLiked,
+        handelOnCompleteOrder,
+      
       }}
     >
       {children}

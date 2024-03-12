@@ -61,8 +61,11 @@ const cartslice = createSlice({
             state.cartdata = [...actions.payload]
         },
         getEmptycart:(state,actions)=>{
-            // state.cartdata= actions.payload
+            state.cartdata= actions.payload
             // cartToDatabase({})
+            const carD= {...state.cartdata}
+            cartToDatabase(carD)
+            localStorage.setItem('cart',JSON.stringify(state.cartdata))
         }
     }
 })
