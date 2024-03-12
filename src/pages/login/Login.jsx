@@ -8,6 +8,7 @@ import { auth, fireDB } from '../../firebase/Firebase';
 import { Firestore, collection, doc, getDoc, getFirestore } from 'firebase/firestore';
 import { useDispatch } from 'react-redux';
 import { getCartLogin } from '../../redux/cartslice';
+import { getLikedOnLogin } from '../../redux/likedslice';
 
 export default function Login() {
     const [loading,setloading] = useState(false)
@@ -36,16 +37,19 @@ export default function Login() {
             // console.log(res.user.uid);
             const userref = doc(fireDB,'users',res.user.uid);
             const dataSnap = (await getDoc(userref)).data();
-            console.log(dataSnap);
-            
+            const cartRef = doc(fireDB,'cart',res.user.uid);
+            const cartSnap = ((await getDoc(cartRef)).data())
+            const orderRef = doc(fireDB,'order',res.user.uid);
+            const orderSnap = ((await getDoc(orderRef)).data())
+            const likedRef = doc(fireDB,'liked',res.user.uid);
+            const likedSnap = ((await getDoc(likedRef)).data());
+            // console.log(cartSnap,orderSnap,likedSnap);
             setUser(dataSnap)
-            console.log(dataSnap);
             handelUser(dataSnap)
+            Object.keys(cartSnap).length>0 ? dispatch(getCartLogin(cartSnap)) : null;
+            Object.keys(likedSnap).length>0 ? dispatch(getLikedOnLogin(likedSnap)) : null;
+            // Object.keys(orderSnap).length>0 ? dispatch(ge(orderSnap)) : null;
             setloading(false);
-            // const cart = doc(fireDB,'cart',res.user.uid);
-            // const cartSnap =(await getDoc(cart)).data();
-            // dispatch(getCartLogin(cartSnap))
-            // console.log(cartSnap);
             return navigate('/')
             
         } catch (error) {

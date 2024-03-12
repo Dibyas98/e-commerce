@@ -11,6 +11,7 @@ import Login from './pages/login/Login'
 import Order from './pages/Order/Order'
 import AllProduct from './pages/allproducts/AllProduct'
 import ProductPage from './pages/product-page/ProductPage'
+import Liked from './pages/liked/Liked'
 
 function App() {
   
@@ -37,6 +38,10 @@ function App() {
         {
           path:'/order',
           element:<Order></Order>
+        },
+        {
+          path:'/liked',
+          element:<Liked></Liked>
         },
         {
           path:'/product/:id',

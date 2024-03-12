@@ -16,7 +16,6 @@ export default function SignUp() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate()
     const cart= useSelector((store) => store.cart.cartdata)
-    console.log(cart);
     const sigup = async () =>{
         setloading(true);
         if(name === '' || email === '' || password === ''){
@@ -33,9 +32,15 @@ export default function SignUp() {
               email:users.user.email,
               time:Timestamp.now()
             }
+            const cart = {}
+            const order = {}
+            const liked = {}
            await setDoc(doc(fireDB,'users',users.user.uid),user)
+           await setDoc(doc(fireDB,'cart',users.user.uid),cart)
+           await setDoc(doc(fireDB,'order',users.user.uid),order)
+           await setDoc(doc(fireDB,'liked',users.user.uid),liked)
            setloading(false)
-          return navigate('/')
+          return navigate('/login')
        
        ;
         } catch (error) {

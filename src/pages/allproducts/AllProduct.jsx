@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Card from './card/Card';
-// import { apidata } from '../../apidata';
+import { apidata } from '../../apidata';
 import { myContext } from '../../context/Data';
 import { useSelector } from 'react-redux';
 import { getSearchData } from '../../redux/searchslice';
@@ -13,8 +13,6 @@ export default function AllProduct() {
     // console.log(apidata.data);
     const apidata = useSelector((store) => store.search.searchData);
     // console.log(apidata);
-    
-    
   return (
     <div className='flex flex-col h-auto gap-4 py-11 ' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
       {

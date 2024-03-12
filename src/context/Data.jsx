@@ -2,9 +2,16 @@ import React, { createContext, useEffect, useState } from "react";
 import { fetchData } from "../api/api";
 import { useDispatch } from "react-redux";
 import { getSearchData } from "../redux/searchslice";
-import { deleteCartData, getCartLogin, getCartdata, getcartLoc } from "../redux/cartslice";
+import {
+  deleteCartData,
+  getCartLogin,
+  getCartdata,
+  getcartLoc,
+} from "../redux/cartslice";
 import { doc, getDoc } from "firebase/firestore";
 import { fireDB } from "../firebase/Firebase";
+import { getDeleteLiked, getLikedUpdate, setLikedLogout, setLikedOnRefresh } from "../redux/likedslice";
+import Logo from "../component/navbar/logo/Logo";
 
 export const myContext = createContext();
 export default function Data({ children }) {
@@ -54,29 +61,42 @@ export default function Data({ children }) {
     dispatch(deleteCartData(data));
   };
 
-  // useEffect(() => {
-  //   const handelCartOnLoading = () => {
-  //     const storecart = localStorage.getItem("cart")
-  //       ? JSON.parse(localStorage.getItem("cart"))
-  //       : [];
-  //     dispatch(getcartLoc(storecart));
-  //   };
-  //   handelCartOnLoading();
-  // }, [user]);
-
   useEffect(() => {
-    async function handelCartDataOnEveryLogin() {
-      try {
-        const cart = doc(fireDB, "cart", user.uid);
-        const cartSnap = (await getDoc(cart)).data();
-        dispatch(getCartLogin(cartSnap));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    handelCartDataOnEveryLogin();
-  }, []);
+    const handelCartOnLoading = () => {
+      const storecart = localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : [];
+      dispatch(getcartLoc(storecart));
+    };
+    handelCartOnLoading();
+  }, [user]);
 
+  const HandelCartOnLogin = () => {
+    cartSnap.cart.length > 0 ? dispatch(getCartLogin(cartSnap)) : null;
+  };
+ 
+
+  // LIKED DATA ALL FUNCTIONS
+
+  useEffect(()=>{
+    const handelLikedOnLoading = ()=>{
+      const storeLiked = localStorage.getItem('liked')
+      ?JSON.parse(localStorage.getItem('liked')):[];
+      dispatch(setLikedOnRefresh(storeLiked))
+    };
+    handelLikedOnLoading();
+  },[])
+  const handelLikedData = (product, type) => {
+    if (!type) {
+      dispatch(getLikedUpdate(product));
+    } else {
+      dispatch(getDeleteLiked(product));
+    }
+  };
+const handelLougoutLiked = ()=>{
+  console.log('h');
+  dispatch(setLikedLogout([]))
+}
   return (
     <myContext.Provider
       value={{
@@ -92,6 +112,9 @@ export default function Data({ children }) {
         search,
         handelAddCart,
         handelCartDelete,
+        HandelCartOnLogin,
+        handelLikedData,
+        handelLougoutLiked
       }}
     >
       {children}

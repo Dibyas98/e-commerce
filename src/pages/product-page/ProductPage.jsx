@@ -1,19 +1,30 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { myContext } from '../../context/Data'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { apidata } from '../../apidata';
+// import { apidata } from '../../apidata';
 
 export default function ProductPage() {
-    const {mode,handelAddCart} = useContext(myContext)
+    const {mode,handelAddCart,handelLikedData} = useContext(myContext)
     const params = useParams();
     const products = useSelector((store) => store.search.searchData);
     const productDetails = products.find((ent) => ent.product_id == params.id)
-    // console.log(params);
-    console.log(productDetails);
+    // const productDetails = apidata.data.find((ent) => ent.product_id == params.id)
+    const LikedData = useSelector((store) => store.liked.liked)
     window.scrollTo(0, 0);
-    
-    
+    const[like,setlike] = useState(false);
+    const handelLikeBtn = (arg)=>{
+        setlike(!like)
+        handelLikedData(productDetails,arg)
+    }
+
+    const handelLikedOrNot = LikedData.find((ent) => ent.product_id == params.id);
+    useEffect(()=>{
+        if(handelLikedOrNot){
+            setlike(!like)
+        }
+    },[])
   return (
     <section className="overflow-hidden text-gray-600 body-font">
                 <div className="container px-5 py-16 mx-auto">
@@ -140,7 +151,7 @@ export default function ProductPage() {
                                     Add To Cart
                                 </button>
                                 <button className="inline-flex items-center justify-center w-10 h-10 p-0 ml-4 text-gray-500 bg-gray-200 border-0 rounded-full">
-                                    <svg
+                                    <svg onClick={()=>handelLikeBtn(like)} style={{fill: like?'red':'white'}}
                                         fill="currentColor"
                                         strokeLinecap="round"
                                         strokeLinejoin="round"

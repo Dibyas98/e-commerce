@@ -13,7 +13,6 @@ const user = JSON.parse(localStorage.getItem('user'));
       try {
         // console.log(user.uid);
         await setDoc(doc(fireDB,'cart',user.uid),carD)
-        console.log('to da');
       } catch (error) {
       console.log(error);
       }
@@ -43,12 +42,6 @@ const cartslice = createSlice({
                 cartToDatabase(carD)
     localStorage.setItem('cart',JSON.stringify(state.cartdata))
             }
-            
-            // console.log(state.cartdata);
-            
-    
-    
-            
         },
         getCartLogin:(state,actions) =>{
             // console.log(actions.payload);
@@ -56,9 +49,6 @@ const cartslice = createSlice({
                 state.cartdata=[...state.cartdata,value]
             })
             localStorage.setItem('cart',JSON.stringify(state.cartdata))
-        //    state.cartdata= [...actions.payload]
-        //    console.log(state.cartdata);
-        // console.log(actions.payload);
         },
         deleteCartData:(state,actions) =>{
             state.cartdata = state.cartdata.filter((ele)=> ele.product_id != actions.payload.product_id)
