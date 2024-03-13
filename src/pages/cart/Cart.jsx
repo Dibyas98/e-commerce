@@ -22,7 +22,8 @@ export default function Cart() {
       let total = 0;
       cartList.forEach((ele) => {
         // console.log(ele.offer.price.split("$"));
-        let bal = parseFloat(ele.offer.price.split("₹")[1]); // Convert to number
+        
+        let bal = parseFloat(ele.offer.price.replace(/[₹,$]/g, '')); // Convert to number
         total += bal;
       });
       setTotalAmount(total);

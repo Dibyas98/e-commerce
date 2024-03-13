@@ -8,11 +8,11 @@ export default function Card({ prod }) {
 
 
     return (
-        <Link to={`/${prod.product_id}/${proname}`} className='flex w-full px-5 h-auto gap-8 mx-auto sm:w-1/2' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
-            <div className='flex justify-center w-36'>
+        <Link to={`/${prod.product_id}/${proname}`} className='flex w-full  h-auto gap-8 items-center' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
+            <div className='flex justify-between w-28 h-28'>
                 <img src={prod.product_photos[0]} className='rounded-2xl' alt="" />
             </div>
-            <div className='flex flex-col gap-2 py-3'>
+            <div className='flex w-3/5 flex-col gap-2 py-3'>
                 <h1>{prod.product_title}</h1>
                 <div className='flex w-auto gap-2'>
                     {prod.offer.store_rating?<Rate value={prod.offer.store_rating} />:null}

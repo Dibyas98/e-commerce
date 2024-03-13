@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { fetchData } from "../api/api";
 import { useDispatch, useSelector } from "react-redux";
 import { getSearchData } from "../redux/searchslice";
+import { apidata } from "../apidata";
 import {
   deleteCartData,
   getCartLogin,
@@ -20,26 +21,52 @@ import {
 import Logo from "../component/navbar/logo/Logo";
 import { setOrderOnLogout, setOrderPlacedOnRefresh } from "../redux/orderslice";
 
+// {=================================================================
+//                     CREATE NEW CONTEXT
+// =================================================================}
+
 export const myContext = createContext();
+
+// =================================================================
+//                     CONTEXT FUNCTION
+// =================================================================
+
 export default function Data({ children }) {
+  //
   const dispatch = useDispatch();
-  const [productDetails,setproductDetails]= useState({})
+  const [productDetails, setproductDetails] = useState({});
+
+  // =================================================================
+  //                  MODE TYPE FROM LOCAL STOREGE
+  // =================================================================
   const [mode, setMode] = useState(() => {
     const storemode = localStorage.getItem("mode");
     return storemode ? JSON.parse(storemode) : "light";
   });
   const [open, setOpen] = useState(false);
   const [order, setOrder] = useState([]);
+
+  // =================================================================
+  //              GET USER DETAILS FROM LOCAL STORAGE
+  // =================================================================
+
   const [user, setUser] = useState(() => {
     const storeData = localStorage.getItem("user");
     return storeData ? JSON.parse(storeData) : {};
   });
+
   const [search, setSearch] = useState("");
+
+  // =================================================================
+  //          SET USER DETAIL IN LOCAL STORAGE ON LOGIN
+  // =================================================================
 
   const handelUser = (arg) => {
     localStorage.setItem("user", JSON.stringify(arg));
   };
-
+  // =================================================================
+  //              TOGGLE BETWEEEN LIGHT AND DARK MODE
+  // =================================================================
   const togglemode = () => {
     if (mode == "light") {
       setMode("dark");
@@ -83,7 +110,9 @@ export default function Data({ children }) {
     cartSnap.cart.length > 0 ? dispatch(getCartLogin(cartSnap)) : null;
   };
 
-  // LIKED DATA ALL FUNCTIONS
+  // =================================================================
+  //                  LIKED DATA ALL FUNCTIONS
+  // =================================================================
 
   useEffect(() => {
     const handelLikedOnLoading = () => {
@@ -102,15 +131,18 @@ export default function Data({ children }) {
     }
   };
   const handelLougoutLiked = () => {
-    console.log("h");
     dispatch(setLikedLogout([]));
     dispatch(setOrderOnLogout([]));
   };
 
-  // ORDER FUNCTION
+  // =================================================================
+  //                      ORDER FUNCTION
+  // =================================================================
+
   const handelOnCompleteOrder = () => {
     dispatch(getEmptycart([]));
   };
+
   useEffect(() => {
     const handelOrderOnRefresh = () => {
       const storeOrder = localStorage.getItem("order")
@@ -121,7 +153,45 @@ export default function Data({ children }) {
     handelOrderOnRefresh();
   }, []);
 
-  // DISPLAY SINGLE PAGE DATA
+  // ================================================================
+  //                          SORT FILTER
+  // =================================================================
+
+  const [sortFilter, setSortFilter] = useState([]);
+  const [product,setproduct] =useState([])
+  const handelFilterData= ()=>{
+    const product1 = useSelector((store) => store.search.searchData)
+    // console.log(product);
+    setproduct(product1)
+  }
+  const handelSortFilter = (event) => {
+    // console.log(event.target.value);
+    // const product = useSelector((store) => store.search)
+    // console.log(product);
+    if (event.target.value == "Low to High") {
+      const filter = [...product].sort((a, b) => {
+        let s =parseFloat(a.offer.price.replace(/[₹,$]/g, '')) -parseFloat(b.offer.price.replace(/[₹,$]/g, '')) ;
+        return s
+      });
+
+      setSortFilter(filter);
+    }
+    else if(event.target.value == 'High to Low'){
+      const filter = [...product].sort((a, b) => {
+        let s =parseFloat(b.offer.price.replace(/[₹,$]/g, '')) -parseFloat(a.offer.price.replace(/[₹,$]/g, '')) ;
+        console.log('s',s);
+        return s
+      });
+
+      setSortFilter(filter);
+    }
+    else if(event.target.value == 'reset'){
+      
+
+      setSortFilter([]);
+    }
+  };
+  console.log(sortFilter);
 
   return (
     <myContext.Provider
@@ -142,7 +212,10 @@ export default function Data({ children }) {
         handelLikedData,
         handelLougoutLiked,
         handelOnCompleteOrder,
-      
+        handelSortFilter,
+        sortFilter,
+        setSortFilter,
+        handelFilterData,
       }}
     >
       {children}

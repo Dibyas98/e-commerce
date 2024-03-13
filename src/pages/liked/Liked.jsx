@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 import Card from '../allproducts/card/Card';
 import { myContext } from '../../context/Data';
+import LikedProductCard from '../../component/LIkedProductCard/LikedProductCard';
 
 
 export default function Liked() {
@@ -12,7 +13,7 @@ export default function Liked() {
     <div className='flex flex-col h-auto gap-4 py-11 ' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
       {
         LikedProduct.length > 0 ? LikedProduct.map((prod) =>{
-          return <Card key={prod.product_id} prod={prod}></Card>
+          return <LikedProductCard key={prod.product_id} prod={prod}></LikedProductCard>
       }):<h1>No Product Add</h1>
       }
     </div>

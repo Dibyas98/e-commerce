@@ -13,6 +13,7 @@ import AllProduct from './pages/allproducts/AllProduct'
 import ProductPage from './pages/product-page/ProductPage'
 import Liked from './pages/liked/Liked'
 
+
 function App() {
   
   const route = createBrowserRouter([
@@ -53,11 +54,15 @@ function App() {
           element:<ProductPage></ProductPage>,
           // errorElement: <Home/>
         },
-
+        
         
 
       ]
 
+    },
+    {
+      path:'*',
+      element:<h1>Error</h1>
     }
   ])
 
