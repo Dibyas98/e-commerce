@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { fetchData } from "../api/api";
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchData } from "../redux/searchslice";
+import { getSearchData, setSearchonRefresh } from "../redux/searchslice";
 import { apidata } from "../apidata";
 import {
   deleteCartData,
@@ -80,6 +80,7 @@ export default function Data({ children }) {
   };
   const handelSearch = (arg) => {
     // setSearch(arg)
+    dispatch(setSearchonRefresh([]))
     console.log(arg);
     fetchData(arg).then((dat) => dispatch(getSearchData(dat)));
   };

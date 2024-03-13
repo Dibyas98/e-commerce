@@ -23,9 +23,9 @@ export default function LikedProductCard({ prod }) {
     // },[])
 
   return (
-    <>
+    <div className="w-full flex items-center gap-2  xl:w-2/4  p-2">
       <div
-        className="flex w-full  h-auto gap-8 items-center"
+        className="flex w-full h-auto xl:gap-8 items-center"
         style={{
           backgroundColor: mode === "dark" ? "#282c34" : "",
           color: mode === "dark" ? "white" : "",
@@ -56,9 +56,9 @@ export default function LikedProductCard({ prod }) {
           {/* <p>Free Delivery</p> */}
         </div>
       </div>
-      <div>
+      <div className="flex flex-col gap-5 items-center">
         <button
-          className="flex px-6 py-2 ml-auto text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600"
+          className="flex px-0 xl:px-6  ml-auto text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600"
           onClick={() => handelAddCart(prod)}
         >
           Add To Cart
@@ -78,6 +78,6 @@ export default function LikedProductCard({ prod }) {
           </svg>
         </button>
       </div>
-    </>
+    </div>
   );
 }

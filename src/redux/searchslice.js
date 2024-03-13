@@ -12,9 +12,12 @@ const searchSlice = createSlice({
       
       state.searchData = action.payload.data;  // Update the searchData property
       // console.log(state.searchData);
+    },
+    setSearchonRefresh:(state,action)=>{
+      state.searchData = []
     }
   }
 });
 
-export const { getSearchData } = searchSlice.actions;
+export const { getSearchData,setSearchonRefresh } = searchSlice.actions;
 export default searchSlice.reducer;

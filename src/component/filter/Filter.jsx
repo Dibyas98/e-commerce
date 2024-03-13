@@ -1,11 +1,18 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { myContext } from "../../context/Data";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getSearchData, setSearchonRefresh } from "../../redux/searchslice";
 
 export default function Filter() {
   const { mode, handelSearch } = useContext(myContext);
+  const dispatch = useDispatch();
+  // useEffect(() =>{
+  //   dispatch(setSearchonRefresh([]))
+  // },[])
   const searchRef = useRef();
   const navigate = useNavigate();
+  window.scroll(0,0)
   return (
     <div>
       <div className="container px-4 mx-auto mt-5 ">

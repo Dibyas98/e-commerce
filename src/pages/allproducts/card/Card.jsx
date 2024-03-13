@@ -8,7 +8,7 @@ export default function Card({ prod }) {
 
 
     return (
-        <Link to={`/${prod.product_id}/${proname}`} className='flex w-full  h-auto gap-8 items-center' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
+        <Link to={`/${prod.product_id}/${proname}`} className='flex w-full xl:w-2/3 h-auto gap-8 items-center border-2 rounded-md px-3' style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
             <div className='flex justify-between w-28 h-28'>
                 <img src={prod.product_photos[0]} className='rounded-2xl' alt="" />
             </div>
